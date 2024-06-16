@@ -50,8 +50,8 @@ jobs:
 
       - name: Authenticate to Salesforce
         run: |
-          sf org test jwt --client-id 3MVG9gwxgOelbpo_IP5uSz.Ipp3JAICWaShiRomW4S_YHSMaZlteRJrgBWrI3QrY53_WSdzkNOr71HZjfzvpI --jwt-key-file assets/server.key --username test-atm8hntvipb9@example.com --set-default --alias HubOrg --instance-url https://test.salesforce.com
-        #
+          sf org login jwt --client-id 3MVG9gwxgOelbpo_IP5uSz.Ipp3JAICWaShiRomW4S_YHSMaZlteRJrgBWrI3QrY53_WSdzkNOr71HZjfzvpI --jwt-key-file assets/server.key --username test-atm8hntvipb9@example.com --set-default --alias HubOrg --instance-url https://login.salesforce.com
+        
       - name: Validate Source Code Against Salesforce ORG
         run: |
          sf project deploy start --source-dir force-app --test-level RunLocalTests --target-org HubOrg --coverage-formatters clover
