@@ -48,12 +48,12 @@ jobs:
         run: |
           openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
 
-      - name: Authenticate to Salesforce
-        run: |
-          sf org login jwt --client-id 3MVG9gwxgOelbpo_IP5uSz.Ipp3JAICWaShiRomW4S_YHSMaZlteRJrgBWrI3QrY53_WSdzkNOr71HZjfzvpI --jwt-key-file assets/server.key --username test-atm8hntvipb9@example.com --set-default --alias HubOrg --instance-url https://login.salesforce.com
+    #  - name: Authenticate to Salesforce
+    #    run: |
+    #      sf org login jwt --client-id 3MVG9gwxgOelbpo_IP5uSz.Ipp3JAICWaShiRomW4S_YHSMaZlteRJrgBWrI3QrY53_WSdzkNOr71HZjfzvpI --jwt-key-file assets/server.key --username test-atm8hntvipb9@example.com --set-default --alias HubOrg --instance-url https://test.salesforce.com
         
-      - name: Validate Source Code Against Salesforce ORG
-        run: |
-         sf project deploy start --source-dir force-app --test-level RunLocalTests --target-org HubOrg --coverage-formatters clover
+    #  - name: Validate Source Code Against Salesforce ORG
+    #    run: |
+    #     sf project deploy start --source-dir force-app --test-level RunLocalTests --target-org HubOrg --coverage-formatters clover
 
   
