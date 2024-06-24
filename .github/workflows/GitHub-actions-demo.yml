@@ -43,7 +43,7 @@ jobs:
         cat destructiveChanges/destructiveChanges.xml
 
     - name: Authentication to PROD 
-      run: node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=3MVG9GCMQoQ6rpzR1iIJ_5t2.L5sskzNvBe4XZ.nqdSV7h0UNBNzFg7v3yK0a.BRLL8VhIbV88HrrdVnOLzIm --username=arunachalam98@kap.com --jwtkeyfile server.key --setalias=PROD
+      run: node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=3MVG9GCMQoQ6rpzR1iIJ_5t2.L5sskzNvBe4XZ.nqdSV7h0UNBNzFg7v3yK0a.BRLL8VhIbV88HrrdVnOLzIm--username=arunachalam98@kap.com --jwtkeyfile server.key --setalias=PROD
 
     - name: Deployement to PROD
       run: |
