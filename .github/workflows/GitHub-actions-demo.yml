@@ -21,6 +21,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '20'
+      # Install the SFDX CLI using the npm command
+    - name: Install the SFDX CLI
+      run: |
+          npm install @salesforce/cli --global
+          sf --help
 
     - name: Install SFDX & SFDX Git Delta
       run: |
