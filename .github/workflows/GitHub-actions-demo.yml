@@ -15,6 +15,7 @@ jobs:
     environment: ScratchDev
     steps:
     - uses: actions/checkout@v2
+      name: Debug
       with:
         ref: scratchOrgDevelopBranch
         # Fetch all history commit
@@ -52,8 +53,8 @@ jobs:
       run: |
         echo "SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}"
         echo "SF_USER_NAME: ${{ secrets.SF_USER_NAME }}"           
-    - name: Authenticate to Salesforce using JWT
-      run: |
+    #- name: Authenticate to Salesforce using JWT
+      #run: |
         #echo "${{ secrets.SF_PRIVATE_KEY }}" > server.key
         #sfdx force:auth:jwt:grant --clientid=${{ secrets.SF_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SF_USER_NAME }} --setdefaultdevhubusername
 
