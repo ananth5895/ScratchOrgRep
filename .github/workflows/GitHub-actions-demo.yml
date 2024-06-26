@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ScratchDev
     steps:
     - uses: actions/checkout@v2
       with:
@@ -49,7 +50,7 @@ jobs:
 
     - name: Authenticate to Salesforce using JWT
       run: |
-        echo "SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}"         
+        echo "SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}"
         echo "SF_USER_NAME: ${{ secrets.SF_USER_NAME }}"           
     #- name: Authenticate to Salesforce using JWT
       #run: |
