@@ -49,9 +49,8 @@ jobs:
 
     - name: Authenticate to Salesforce using JWT
       run: |
-          echo "${{secrets.SF_PRIVATE_KEY}}" > server.key
-          sfdx force:auth:jwt:grant --clientid=3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K --jwtkeyfile=server.key --username=${{ secrets.SF_USER_NAME }} --setdefaultdevhubusername
-
+        echo "${{ secrets.SF_PRIVATE_KEY }}" > server.key
+        sfdx force:auth:jwt:grant --clientid=${{ secrets.SF_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SF_USER_NAME }} --setdefaultdevhubusername
 
        # sf org login jwt --client-id 3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K --jwt-key-file assets/server.key --username arunachalam98@kap.com --set-default --alias HubOrg --instance-url https://login.salesforce.com
    
