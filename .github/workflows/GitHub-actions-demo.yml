@@ -31,8 +31,8 @@ jobs:
       run: |
         npm install sfdx-cli@7.209.6
         echo y | node_modules/sfdx-cli/bin/run plugins:install sfdx-git-delta
-    - name: Org Authorization
-      run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
+   # - name: Org Authorization
+   #   run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
 
 
     - name: Generate package.xml
