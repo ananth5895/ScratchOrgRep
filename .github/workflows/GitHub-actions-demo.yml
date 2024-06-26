@@ -1,61 +1,34 @@
-# This is a basic workflow to help you get started with Actions
+name: Deploy to Salesforce
 
-name: PROD Deployment
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main"]
- 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches:
+      - main
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: scratchOrgDevelopBranch
-        # Fetch all history commit
-        fetch-depth: 0
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '20'
-      # Install the SFDX CLI using the npm command
-    - name: Install the SFDX CLI
-      run: |
-          npm install @salesforce/cli --global
-          sf --help
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Install SFDX & SFDX Git Delta
-      run: |
-        npm install sfdx-cli@7.209.6
-        echo y | node_modules/sfdx-cli/bin/run plugins:install sfdx-git-delta
-   # - name: Org Authorization
-   #   run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
+      - name: Set up Salesforce CLI
+        uses: salesforcecli/sfdx-actions/setup@v1
+        with:
+          version: latest
 
+      - name: Authenticate to Salesforce using JWT
+        env:
+          SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
+          SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
+          SF_PRIVATE_KEY: ${{ secrets.SF_PRIVATE_KEY }}
+        run: |
+          echo "${SF_PRIVATE_KEY}" > server.key
+          sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY --jwtkeyfile server.key --username $SF_USER_NAME --setdefaultdevhubusername
 
-    - name: Generate package.xml
-      run: |
-        #Generate package.xml between the current branch & 
-        node_modules/sfdx-cli/bin/run sgd:source:delta --to "HEAD" --from "HEAD~1" --output .
-        # Install xmlstarlet
-        sudo apt-get install -y xmlstarlet
-
-        # Set the version in package.xml to 59.0
-        xmlstarlet ed --inplace -u "/Package/version" -v "59.0" package/package.xml
-
-        cat package/package.xml
-        cat destructiveChanges/destructiveChanges.xml
-
-    - name: Authentication to PROD 
-      run: |
-        node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K --username=arunachalam98@kap.com --jwtkeyfile server.key --setalias=PROD
-
-       # sf org login jwt --client-id 3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K --jwt-key-file assets/server.key --username arunachalam98@kap.com --set-default --alias HubOrg --instance-url https://login.salesforce.com
-   
-      
-    - name: Deployement to PROD
-      run: |
-        node_modules/sfdx-cli/bin/run force:source:deploy -x package/package.xml -u PROD
- 
+      - name: Deploy to Salesforce
+        run: |
+          sfdx force:source:deploy -p force-app/main/default
+          sfdx force:source:deploy -p manifest/package.xml
+          sfdx force:apex:test:run --resultformat human --codecoverage --outputdir test-results --testlevel RunLocalTests
