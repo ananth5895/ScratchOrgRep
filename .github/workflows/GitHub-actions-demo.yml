@@ -31,8 +31,7 @@ jobs:
       run: |
         npm install sfdx-cli@7.209.6
         echo y | node_modules/sfdx-cli/bin/run plugins:install sfdx-git-delta
-    - name: Org Authorization
-      run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K DE3B4F6346E0CFA95CA695168A0FD8DA4D06AE808A0AFA9A4DBD2502D5DD6FE7 -iv AC767FEDCF2105140E84B62495C3F43A
+
 
 
     - name: Generate package.xml
@@ -51,7 +50,7 @@ jobs:
     - name: Authenticate to Salesforce using JWT
       run: |
           echo "${{secrets.SF_PRIVATE_KEY}}" > server.key
-          sfdx force:auth:jwt:grant --clientid=${{ secrets.SF_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SF_USER_NAME }} --setdefaultdevhubusername
+          sfdx force:auth:jwt:grant --clientid=3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K --jwtkeyfile=server.key --username=${{ secrets.SF_USER_NAME }} --setdefaultdevhubusername
 
 
        # sf org login jwt --client-id 3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K --jwt-key-file assets/server.key --username arunachalam98@kap.com --set-default --alias HubOrg --instance-url https://login.salesforce.com
