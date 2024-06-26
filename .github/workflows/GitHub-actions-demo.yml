@@ -52,12 +52,34 @@ jobs:
       env:
         SF_CONSUMER_KEY: "3MVG9GCMQoQ6rpzR1iIJ_5t2.L.MZtBh6YpZKeMoB2UZd8R9V5zjlsjBuRAfUlgpab4Sozm3Rpx8QzwVdq.8K"
         SF_USER_NAME: "arunachalam98@kap.com"
-        SF_PRIVATE_KEY: "MIIEpAIBAAKCAQEAwnT1H1VGK8AVZjuhYf7U5WCby9xHEFyoz2j0enFIUxjBi7TQ
-              HpdiRIFDL6tdCpCo2zQ1Mlk/PpzJwVGSv1jYbiaNUssrYCjL5ZnvZIA8Wtpp0G5uGt0wS1sD3h78br2AI7nbcjASKsE+wWIOGT0iTfjODNtW2BHVs1pF2/KB2rajehhQf3TppjoTA/3L2/nAuveGd9FxjywuXZ0GVOxya0gj0zF9Qrh4Li7rgLIOLthyt9XE2TPyczTUzcjBP44Dt21gz+f2PcIVol0qFLpriMlnfCNtDjy3jqZKR/vvUXWpUQK9/9WyPf0V42lB78lVda0/vF8zQmWp9zLKOlx84wIDAQABAoIBAQCmzZ7KruJPeyigFnyby/WhgRqDZ8QJtAIWUKiOM4hfx3eWuJZh92eS7fLM/EkGXAqMZh9PviCzO9kRHEEuJC8bZbSKlb7ycGxe2onwgtPC92IXKfMG1j+sFDmgGqJc9+7oNnCYZcXfqP6E8fC4E6nOiqNtgeTf2YSfocsVHdPn4IxD/6pySKDxh9bBramaB8t1rhHrdJU3UmVPs4Qu5t3KEpekWabh0GeitKZO0mGi5otiJxyrAy9Np2pLLWW39JsYBW2ypOcMXVg7OOGDhNljfKE4vRN4/uDcWi+WerLN/nCIjXuLDE03DM3x2BxMSB8tRIigousIYf4bwnpo44spAoGBAPehWASRGnzn8QCXCVUOGLlv3Zl+2kWibdcKsY5qUifXv02O0QtS+rTU2YR9zk/60DhdZshrYh9kSo1ERApGxedKQgqVIOAj0I94f5h3hfk7k9ubuXRAw9iJVSPsw7QHZ4eIXoiSwpEyJVGHIBDn551HjYr8WG6eAcs/RAoDwH4tAoGBAMkHhfu/kBE60ZfTiT1Lv5HSYx7VhD6lVAxi7C3pNqyWcCb4MMw7OAoJbVUbtGCDL2cgnvqrsCABF1W13VPHmpmuEBfD2S4OvUabvc6wBiTgbHwLxhI4tSQh6h7qvpXJun6q
-              0+eSeu5t6uXCcM8MwJotlnubxEjPTOAubttpUOFPAoGBAK+/mgl7tpHpx9lEWMI+A/wwUdVr+5wqYMybcVMDUJWogMSZ1PG1jeujmVF4PGH1P6yRVa5u0DA5bNQAHE4y
-              1qiFwoNiPff2U0JQIjbitXoi95iIWEIS6SyYo42gr3DpRGgjt/w0NNT6AxRu06pL/M1aiDGZUWYIzHskxrRY31htAoGAIIuZQ2KF/mQZXo0eoM/Mmd0Hsww6NrIpYz/4
-              oI4rDdHlIkn4DHhh4C4ahzbPAvj6CaYcVtTI1MWYc4XX6SJdgxfM/yvz0yMLvYylM/sHY5z5szNsw7JukQT0lEDIzhM0oCEj4U+zmzosVzodbUfRPqS2whg7tNXqyjh6
-              Ngdc0r0CgYAH341k4LPrVjzNphfzfHkQj57BeADZXG/ytwagKzNnt3LSVDp5csI/UcKq1cEeEnTS82vNLEn2k5uLNnzf5sRLT3G0wBDoP8s5d4HpY/KCgfV5ao1UHlyiZrz7GaNux0WRGy80DmRTsIfTxkepO4xTpHy3tDt64O4mjYprClhttg=="
+        SF_PRIVATE_KEY: 
+            "-----BEGIN RSA PRIVATE KEY-----
+            MIIEpAIBAAKCAQEAwnT1H1VGK8AVZjuhYf7U5WCby9xHEFyoz2j0enFIUxjBi7TQ
+            HpdiRIFDL6tdCpCo2zQ1Mlk/PpzJwVGSv1jYbiaNUssrYCjL5ZnvZIA8Wtpp0G5u
+            Gt0wS1sD3h78br2AI7nbcjASKsE+wWIOGT0iTfjODNtW2BHVs1pF2/KB2rajehhQ
+            f3TppjoTA/3L2/nAuveGd9FxjywuXZ0GVOxya0gj0zF9Qrh4Li7rgLIOLthyt9XE
+            2TPyczTUzcjBP44Dt21gz+f2PcIVol0qFLpriMlnfCNtDjy3jqZKR/vvUXWpUQK9
+            /9WyPf0V42lB78lVda0/vF8zQmWp9zLKOlx84wIDAQABAoIBAQCmzZ7KruJPeyig
+            Fnyby/WhgRqDZ8QJtAIWUKiOM4hfx3eWuJZh92eS7fLM/EkGXAqMZh9PviCzO9kR
+            HEEuJC8bZbSKlb7ycGxe2onwgtPC92IXKfMG1j+sFDmgGqJc9+7oNnCYZcXfqP6E
+            8fC4E6nOiqNtgeTf2YSfocsVHdPn4IxD/6pySKDxh9bBramaB8t1rhHrdJU3UmVP
+            s4Qu5t3KEpekWabh0GeitKZO0mGi5otiJxyrAy9Np2pLLWW39JsYBW2ypOcMXVg7
+            OOGDhNljfKE4vRN4/uDcWi+WerLN/nCIjXuLDE03DM3x2BxMSB8tRIigousIYf4b
+            wnpo44spAoGBAPehWASRGnzn8QCXCVUOGLlv3Zl+2kWibdcKsY5qUifXv02O0QtS
+            +rTU2YR9zk/60DhdZshrYh9kSo1ERApGxedKQgqVIOAj0I94f5h3hfk7k9ubuXRA
+            w9iJVSPsw7QHZ4eIXoiSwpEyJVGHIBDn551HjYr8WG6eAcs/RAoDwH4tAoGBAMkH
+            hfu/kBE60ZfTiT1Lv5HSYx7VhD6lVAxi7C3pNqyWcCb4MMw7OAoJbVUbtGCDL2cg
+            nvqrsCABF1W13VPHmpmuEBfD2S4OvUabvc6wBiTgbHwLxhI4tSQh6h7qvpXJun6q
+            0+eSeu5t6uXCcM8MwJotlnubxEjPTOAubttpUOFPAoGBAK+/mgl7tpHpx9lEWMI+
+            A/wwUdVr+5wqYMybcVMDUJWogMSZ1PG1jeujmVF4PGH1P6yRVa5u0DA5bNQAHE4y
+            1qiFwoNiPff2U0JQIjbitXoi95iIWEIS6SyYo42gr3DpRGgjt/w0NNT6AxRu06pL
+            /M1aiDGZUWYIzHskxrRY31htAoGAIIuZQ2KF/mQZXo0eoM/Mmd0Hsww6NrIpYz/4
+            oI4rDdHlIkn4DHhh4C4ahzbPAvj6CaYcVtTI1MWYc4XX6SJdgxfM/yvz0yMLvYyl
+            M/sHY5z5szNsw7JukQT0lEDIzhM0oCEj4U+zmzosVzodbUfRPqS2whg7tNXqyjh6
+            Ngdc0r0CgYAH341k4LPrVjzNphfzfHkQj57BeADZXG/ytwagKzNnt3LSVDp5csI/
+            UcKq1cEeEnTS82vNLEn2k5uLNnzf5sRLT3G0wBDoP8s5d4HpY/KCgfV5ao1UHlyi
+            Zrz7GaNux0WRGy80DmRTsIfTxkepO4xTpHy3tDt64O4mjYprClhttg==
+            -----END RSA PRIVATE KEY-----"
       run: |
           echo "${SF_PRIVATE_KEY}" > server.key
           sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY --jwtkeyfile server.key --username $SF_USER_NAME --setdefaultdevhubusername
