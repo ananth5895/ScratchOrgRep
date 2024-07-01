@@ -54,9 +54,9 @@ jobs:
         SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
         SF_USER_NAME: ${{ secrets.SF_USER_NAME }} 
       run: |
-        sf org login jwt --client-id 3MVG9GCMQoQ6rpzR1iIJ_5t2.L8cJeP.eglIcuF0AsX3tZR22SiWkJmkFDqMFCxBQqaipCDGVu1WGUt65yIYx --jwt-key-file assets/server.key --username arunachalam98@kap.com --instance-url https://login.salesforce.com/
-          
-        
+        echo ${{ secrets.SFDX_URL}} > ./SFDX_QA_URL.txt
+    - name: 'Authenticate to  qa Org'
+      run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a Dev
     #- name: Authenticate to Salesforce using JWT
       #run: |
         #echo "${{ secrets.SF_PRIVATE_KEY }}" > server.key
