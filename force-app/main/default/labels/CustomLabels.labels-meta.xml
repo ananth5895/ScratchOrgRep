@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>Month</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Month</shortDescription>
+        <value>December</value>
+    </labels>
+    <labels>
         <fullName>weekend</fullName>
         <language>en_US</language>
         <protected>true</protected>
