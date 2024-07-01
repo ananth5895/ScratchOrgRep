@@ -54,7 +54,7 @@ jobs:
         SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
         SF_USER_NAME: ${{ secrets.SF_USER_NAME }} 
       run: |
-        sf org login jwt --client-id ${{ secrets.SF_CONSUMER_KEY }} --jwt-key-file assets/server.key --username ${{ secrets.SF_USER_NAME }} --instance-url https://login.salesforce.com/
+        sf org login jwt --client-id 3MVG9GCMQoQ6rpzR1iIJ_5t2.L8cJeP.eglIcuF0AsX3tZR22SiWkJmkFDqMFCxBQqaipCDGVu1WGUt65yIYx --jwt-key-file assets/server.key --username arunachalam98@kap.com --instance-url https://login.salesforce.com/
           
         
     #- name: Authenticate to Salesforce using JWT
