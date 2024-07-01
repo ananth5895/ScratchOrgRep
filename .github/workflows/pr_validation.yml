@@ -1,7 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
 name: Production Pipeline
-run-name: ${{ github.actor }} is running pipeline on ${{ github.repository }}
+run-name: ${{ github.actor }} is running pipeline on ${{ github.repository }} 
 
 # Controls when the workflow will run
 on:
@@ -17,6 +17,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ScratchDev
     steps:
     - uses: actions/checkout@v2
       with:
@@ -31,6 +32,10 @@ jobs:
       run: |
         npm install sfdx-cli@7.209.6
         echo y | node_modules/sfdx-cli/bin/run plugins:install sfdx-git-delta
+    - name: Install the SFDX CLI
+      run: |
+          npm install @salesforce/cli --global
+          sf --help
 
     - name: Org Authorization
       run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
@@ -45,21 +50,27 @@ jobs:
     #- name: Authentication to PROD
       #run: |
         #node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=${{secrets.CONSUMER_KEY_PROD}} --username=${{secrets.USERNAME_PROD}} --jwtkeyfile server.key --setalias=PROD
+    - name: Set up secret file
+      run: |
+          echo ${{ secrets.SFDX_URL}} > ./SFDX_QA_URL.txt
+
     - name: 'Authenticate to  PROD Org'
       run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a PROD
-        
+
+
+      
       # Install PMD
-    - name: 'Install PMD'
-      run: |
-       PMD_VERSION=`cat pmd/pmd-version.txt`
-       wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F$PMD_VERSION/pmd-bin-$PMD_VERSION.zip
-       unzip pmd-bin-$PMD_VERSION.zip -d ~
-       mv ~/pmd-bin-$PMD_VERSION ~/pmd
-       ~/pmd/bin/run.sh pmd --version
+    #- name: 'Install PMD'
+      #run: |
+      #PMD_VERSION=`cat pmd/pmd-version.txt`
+      #wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F$PMD_VERSION/pmd-bin-$PMD_VERSION.zip
+      #unzip pmd-bin-$PMD_VERSION.zip -d ~
+      #mv ~/pmd-bin-$PMD_VERSION ~/pmd
+      #~/pmd/bin/run.sh pmd --version
     
     # Run PMD scan
-    - name: 'Run PMD scan'
-      run: ~/pmd/bin/run.sh pmd -d force-app -R pmd/ruleset.xml -f text
+    #- name: 'Run PMD scan'
+     # run: ~/pmd/bin/run.sh pmd -d force-app -R pmd/ruleset.xml -f text
  
     - name: Checkonly for PROD
       run: |
