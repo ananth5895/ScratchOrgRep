@@ -54,8 +54,8 @@ jobs:
         SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
         SF_USER_NAME: ${{ secrets.SF_USER_NAME }} 
       run: |
-        echo $SF_CONSUMER_KEY >> secrets.txt
-        echo $SF_USER_NAME >> secrets.txt        
+        sf org login jwt --client-id $(SF_CONSUMER_KEY) --jwt-key-file assets/server.key --username $(SF_USER_NAME) --instance-url https://login.salesforce.com/
+          
         
     #- name: Authenticate to Salesforce using JWT
       #run: |
