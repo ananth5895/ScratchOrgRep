@@ -7,7 +7,7 @@ on:
   pull_request:
     # Sequence of patterns matched against refs/heads
     branches:    
-      #- feature-US-/*
+      - feature-US-/*
       - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -42,8 +42,8 @@ jobs:
     #- name: Authentication to PROD
       #run: |
         #node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=${{secrets.CONSUMER_KEY_PROD}} --username=${{secrets.USERNAME_PROD}} --jwtkeyfile server.key --setalias=PROD
-    - name: 'Authenticate to  qa Org'
-      run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a Dev
+    - name: 'Authenticate to  PROD Org'
+      run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a PROD
         
       # Install PMD
     - name: 'Install PMD'
