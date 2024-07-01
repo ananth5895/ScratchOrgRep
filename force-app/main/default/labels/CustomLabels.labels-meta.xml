@@ -8,6 +8,13 @@
         <value>December</value>
     </labels>
     <labels>
+        <fullName>Year_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Year Label</shortDescription>
+        <value>2024</value>
+    </labels>
+    <labels>
         <fullName>weekend</fullName>
         <language>en_US</language>
         <protected>true</protected>
