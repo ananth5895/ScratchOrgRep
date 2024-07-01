@@ -17,6 +17,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ScratchDev
     steps:
     - uses: actions/checkout@v2
       with:
