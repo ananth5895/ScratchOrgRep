@@ -53,20 +53,20 @@ jobs:
     - name: Set up secret file
       run: |
           echo ${{ secrets.SFDX_URL}} > ./SFDX_QA_URL.txt
-          
+
     - name: 'Authenticate to  PROD Org'
       run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a PROD
 
 
         
       # Install PMD
-    - name: 'Install PMD'
-      run: |
-       PMD_VERSION=`cat pmd/pmd-version.txt`
-       wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F$PMD_VERSION/pmd-bin-$PMD_VERSION.zip
-       unzip pmd-bin-$PMD_VERSION.zip -d ~
-       mv ~/pmd-bin-$PMD_VERSION ~/pmd
-       ~/pmd/bin/run.sh pmd --version
+    #- name: 'Install PMD'
+      #run: |
+      #PMD_VERSION=`cat pmd/pmd-version.txt`
+      #wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F$PMD_VERSION/pmd-bin-$PMD_VERSION.zip
+      #unzip pmd-bin-$PMD_VERSION.zip -d ~
+      #mv ~/pmd-bin-$PMD_VERSION ~/pmd
+      #~/pmd/bin/run.sh pmd --version
     
     # Run PMD scan
     - name: 'Run PMD scan'
