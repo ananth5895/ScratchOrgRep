@@ -1,0 +1,57 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Prod Deployment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main"]
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ScratchDev
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: scratchOrgDevelopBranch
+        # Fetch all history commit
+        fetch-depth: 0
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '20'
+
+    - name: Install SFDX & SFDX Git Delta
+      run: |
+        npm install sfdx-cli@7.209.6
+        echo y | node_modules/sfdx-cli/bin/run plugins:install sfdx-git-delta
+
+    - name: Org Authorization
+      run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
+
+    - name: Generate package.xml
+      run: |
+        #Generate package.xml between the current branch & 
+        node_modules/sfdx-cli/bin/run sgd:source:delta --to "HEAD" --from "HEAD~1" --output .
+        # Install xmlstarlet
+        sudo apt-get install -y xmlstarlet
+
+        # Set the version in package.xml to 59.0
+        xmlstarlet ed --inplace -u "/Package/version" -v "59.0" package/package.xml
+
+        cat package/package.xml
+        cat destructiveChanges/destructiveChanges.xml
+
+    #- name: Authentication to UAT 
+      #run: node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=${{secrets.CONSUMER_KEY_UAT}} --username=${{secrets.USERNAME_UAT}} --jwtkeyfile server.key --setalias=UAT
+      
+    - name: Org Authorization
+      run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
+
+   
+
+    - name: Deployement to UAT
+      run: |
+        node_modules/sfdx-cli/bin/run force:source:deploy -x package/package.xml -u UAT
