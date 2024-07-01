@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: PR Validation PROD
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      #- feature-US-/*
+      - main
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          # Fetch all history commit
+          fetch-depth: 0
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '20'
+
+    - name: Install SFDX & SFDX Git Delta
+      run: |
+        npm install sfdx-cli@7.209.6
+        echo y | node_modules/sfdx-cli/bin/run plugins:install sfdx-git-delta
+
+    - name: Org Authorization
+      run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
+
+    - name: Generate package.xml
+      run: |
+        #Generate package.xml between the current branch & 
+        node_modules/sfdx-cli/bin/run sgd:source:delta --to "HEAD" --from $(git merge-base HEAD origin/main) --output . 
+        echo "--- package.xml generated with added and modified metadata ---"
+        cat package/package.xml
+
+    #- name: Authentication to PROD
+      #run: |
+        #node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=${{secrets.CONSUMER_KEY_PROD}} --username=${{secrets.USERNAME_PROD}} --jwtkeyfile server.key --setalias=PROD
+    - name: 'Authenticate to  qa Org'
+      run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a Dev
+        
+      # Install PMD
+    - name: 'Install PMD'
+      run: |
+       PMD_VERSION=`cat pmd/pmd-version.txt`
+       wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F$PMD_VERSION/pmd-bin-$PMD_VERSION.zip
+       unzip pmd-bin-$PMD_VERSION.zip -d ~
+       mv ~/pmd-bin-$PMD_VERSION ~/pmd
+       ~/pmd/bin/run.sh pmd --version
+    
+    # Run PMD scan
+    - name: 'Run PMD scan'
+      run: ~/pmd/bin/run.sh pmd -d force-app -R pmd/ruleset.xml -f text
+ 
+    - name: Checkonly for PROD
+      run: |
+        node_modules/sfdx-cli/bin/run force:source:deploy --checkonly -x package/package.xml -l RunLocalTests -u PROD -c
