@@ -1,6 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
-name: PR Validation PROD
+name: Production Pipeline
+run-name: ${{ github.actor }} is running pipeline on ${{ github.repository }}
 
 # Controls when the workflow will run
 on:
@@ -9,6 +10,8 @@ on:
     branches:    
       - feature-US-/*
       - main
+    paths:
+      - 'force-app/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
