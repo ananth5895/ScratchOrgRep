@@ -8,6 +8,13 @@
         <value>December</value>
     </labels>
     <labels>
+        <fullName>Today</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Today</shortDescription>
+        <value>Monday</value>
+    </labels>
+    <labels>
         <fullName>Year_Label</fullName>
         <language>en_US</language>
         <protected>true</protected>
