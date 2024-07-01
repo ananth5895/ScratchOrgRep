@@ -10,8 +10,8 @@ on:
     branches:    
       - feature-US-/*
       - main
-    paths:
-      - 'force-app/**'
+    #paths:
+      #- 'force-app/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
