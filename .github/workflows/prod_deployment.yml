@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: PROD Deployment
+name: Production Deployment
 
 # Controls when the workflow will run
 #on:
@@ -9,8 +9,8 @@ name: PROD Deployment
     #branches: [ "main"]
 on:
   push:
-    branches:
-    - main
+    tags:
+      - PROD-*
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
