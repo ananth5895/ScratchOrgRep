@@ -60,11 +60,13 @@ jobs:
         echo ${{ secrets.SFDX_URL}} > ./SFDX_QA_URL.txt
 
     - name: 'Authenticate to  PROD Org'
-      run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a Dev
+      #run: sf org login sfdx-url -f ./SFDX_QA_URL.txt -s -a Dev
+      run: node_modules/sfdx-cli/bin/run auth:jwt:grant  --clientid=${{secrets.SF_CONSUMER_KEY}} --username=${{secrets.SF_USER_NAME}} --jwtkeyfile server.key --setalias=Prod
 
-    - name: Deployement to UAT
+
+    - name: Deployement to PROD
       run: |
-        node_modules/sfdx-cli/bin/run force:source:deploy -x package/package.xml -u PROD
+          /sfdx-cli/bin/run force:source:deploy -x package/package.xml -u PROD
 
     #- name: Authenticate to Salesforce using JWT
       #run: |
